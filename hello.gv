@@ -1,0 +1,21 @@
+digraph G {
+	Marmalade -> Fruit_preserves
+	Fruit_preserves -> Fruit
+	Fruit -> Botany
+	Botany -> Science
+	Science -> Scientific_method
+	Scientific_method -> Empirical_evidence
+	Empirical_evidence -> Information
+	Information -> Uncertainty
+	Uncertainty -> Epistemology
+	Epistemology -> Philosophy
+	Pear -> Species
+	Species -> Biology
+	Biology -> Natural_science
+	Natural_science -> Branches_of_science
+	Branches_of_science -> Science
+	Decorative_arts -> Design
+	Design -> Prototype
+	Prototype -> Semantics
+	Semantics -> Philosophy
+}

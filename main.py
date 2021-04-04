@@ -1,4 +1,5 @@
 import requests
+import treeTest
 
 
 def remove_all_of_a_kind(input_string, element_begin, element_end, max_rotations_bool=False, max_rotations=2):
@@ -24,6 +25,7 @@ def remove_all_of_a_kind(input_string, element_begin, element_end, max_rotations
             element_before_link = False
         count += 1
     return input_string
+
 
 def getfirstlink(url):
     url = 'https://en.wikipedia.org' + url
@@ -75,15 +77,15 @@ def getfirstlink(url):
             cite_before_link = False
 
     # remove span
-    span_before_link = True
-    while cite_before_link:
-        link_position = output.find('<a')
-        cite_beginning = output.find('<span')
-        if (cite_beginning < link_position) & (cite_beginning != -1):
-            cite_ending = output.find('</span>')
-            output = output[0:cite_beginning:] + output[cite_ending+6: len(output):]
-        else:
-            cite_before_link = False
+    # span_before_link = True
+    # while span_before_link:
+    #     link_position = output.find('<a')
+    #     cite_beginning = output.find('<span')
+    #     if (cite_beginning < link_position) & (cite_beginning != -1):
+    #         cite_ending = output.find('</span>')
+    #         output = output[0:cite_beginning:] + output[cite_ending+6: len(output):]
+    #     else:
+    #         span_before_link = False
 
 
     # get the first link
@@ -93,13 +95,32 @@ def getfirstlink(url):
     return output
 
 
-link = '/wiki/Integral'
+apple_link = '/wiki/Apple_Inc.'
+big_array = []
 
-not_philosophy = True
-while not_philosophy:
-    link = getfirstlink(link)
-    if link == '/wiki/Philosophy':
-        break
+
+def get_links_from_article(url):
+
+
+    not_philosophy = True
+    link = '/wiki/' + url
+    array = [link]
+    while not_philosophy:
+        link = getfirstlink(link)
+        array.append(link)
+        if link == '/wiki/Philosophy':
+            break
+    return array
+
+
+big_array.append(get_links_from_article('Marmalade'))
+big_array.append(get_links_from_article('Pear'))
+big_array.append(get_links_from_article('Decorative_arts'))
+
+print(big_array)
+# big_array = [['/wiki/Botany', '/wiki/Science', '/wiki/Scientific_method', '/wiki/Empirical_evidence', '/wiki/Information', '/wiki/Uncertainty', '/wiki/Epistemology', '/wiki/Philosophy'], ['/wiki/Branches_of_science', '/wiki/Science', '/wiki/Scientific_method', '/wiki/Empirical_evidence', '/wiki/Information', '/wiki/Uncertainty', '/wiki/Epistemology', '/wiki/Philosophy']]
+
+treeTest.draw_tree(big_array)
 
 
 # getfirstlink('https://en.wikipedia.org/wiki/Marmalade')
